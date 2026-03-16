@@ -38,8 +38,16 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+# Creamos la carpeta de la base de datos por defecto y asignamos permisos
+RUN mkdir -p /var/www/html/database && touch /var/www/html/database/database.sqlite
+RUN chown -R www-data:www-data /var/www/html/database
+
 # Damos permisos a las carpetas que Laravel necesita escribir
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Exponemos el puerto 80
+# Permitimos a Dokploy inyectar el puerto dinámicamente (por defecto 80)
+ENV PORT=80
 EXPOSE 80
+
+# En tiempo de ejecución, aplicamos el puerto dinámico configurado a Apache
+CMD bash -c "sed -i \"s/Listen 80/Listen \${PORT}/g\" /etc/apache2/ports.conf && sed -i \"s/:80/:\${PORT}/g\" /etc/apache2/sites-available/000-default.conf && apache2-foreground"
