@@ -49,5 +49,5 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 ENV PORT=80
 EXPOSE 80
 
-# En tiempo de ejecución, aplicamos el puerto dinámico configurado a Apache
-CMD bash -c "sed -i \"s/Listen 80/Listen \${PORT}/g\" /etc/apache2/ports.conf && sed -i \"s/:80/:\${PORT}/g\" /etc/apache2/sites-available/000-default.conf && apache2-foreground"
+# En tiempo de ejecución, aplicamos el puerto dinámico configurado a Apache y evitamos el warning de ServerName
+CMD bash -c "echo 'ServerName localhost' >> /etc/apache2/apache2.conf && sed -i \"s/Listen 80/Listen \${PORT}/g\" /etc/apache2/ports.conf && sed -i \"s/:80/:\${PORT}/g\" /etc/apache2/sites-available/000-default.conf && apache2-foreground"
