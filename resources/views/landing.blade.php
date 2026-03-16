@@ -55,6 +55,23 @@
             display: flex; align-items: center; justify-content: space-between;
         }
         .nav-brand img { height: 38px; border-radius: 8px; }
+        
+        /* Language Toggle in Nav */
+        .nav-actions { display: flex; align-items: center; gap: 1.5rem; }
+        .lang-toggle {
+            display: flex; background: var(--gray-100); border-radius: 20px;
+            padding: 3px; border: 1px solid var(--gray-200);
+        }
+        .lang-btn {
+            padding: .35rem .8rem; border-radius: 17px; border: none; background: transparent;
+            color: var(--gray-500); font-size: .75rem; font-weight: 700; font-family: inherit;
+            cursor: pointer; transition: all .25s ease;
+        }
+        .lang-btn.active {
+            background: var(--white); color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+        .lang-btn:not(.active):hover { color: var(--dark); background: rgba(0,0,0,.03); }
+
         .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
         .nav-links a {
             font-size: .875rem; font-weight: 500; color: var(--gray-600);
@@ -468,30 +485,38 @@
         <a href="/" class="nav-brand">
             <img src="{{ asset('images/icon.png') }}" alt="Motoclick">
         </a>
-        <ul class="nav-links">
-            <li><a href="#video">Video</a></li>
-            <li><a href="#features">Servicios</a></li>
-            <li><a href="#how">Cómo funciona</a></li>
-            <li><a href="/onboarding" class="btn btn-primary">Comenzar Onboarding</a></li>
-        </ul>
+        <div class="nav-actions">
+            <ul class="nav-links">
+                <li><a href="#video" data-i18n="nav_video">Video</a></li>
+                <li><a href="#features" data-i18n="nav_services">Servicios</a></li>
+                <li><a href="#how" data-i18n="nav_how">Cómo funciona</a></li>
+            </ul>
+            <a href="/onboarding" class="btn btn-primary" data-i18n="nav_onboarding">Comenzar Onboarding</a>
+            
+            <!-- Language Toggle -->
+            <div class="lang-toggle" style="margin-left: 1rem;">
+                <button type="button" class="lang-btn active" data-lang="es" onclick="switchLang('es')">ES</button>
+                <button type="button" class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+            </div>
+        </div>
     </div>
 </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero">
     <div class="hero-inner">
-        <div class="hero-badge">
+        <div class="hero-badge" data-i18n="hero_badge">
             <span class="hero-badge-dot"></span>
             Plataforma de delivery en New York
         </div>
-        <h1>Tu delivery, <span class="highlight">menos comisiones,</span> más control.</h1>
-        <p class="hero-sub">Integra tus apps, despacha con tu propia flota y ofrece tracking SMS a tus clientes. Todo desde un solo dashboard.</p>
+        <h1 data-i18n="hero_title">Tu delivery, <span class="highlight" data-i18n="hero_highlight">menos comisiones,</span> más control.</h1>
+        <p class="hero-sub" data-i18n="hero_sub">Integra tus apps, despacha con tu propia flota y ofrece tracking SMS a tus clientes. Todo desde un solo dashboard.</p>
         <div class="hero-actions">
-            <a href="/onboarding" class="btn btn-primary">
+            <a href="/onboarding" class="btn btn-primary" data-i18n="hero_btn_primary">
                 <i data-lucide="rocket" style="width:18px;height:18px"></i>
                 Comenzar Onboarding
             </a>
-            <a href="#video" class="btn btn-outline">
+            <a href="#video" class="btn btn-outline" data-i18n="hero_btn_outline">
                 <i data-lucide="play" style="width:16px;height:16px"></i>
                 Ver video
             </a>
@@ -521,8 +546,8 @@
 <section class="video-section" id="video">
     <div class="video-section-inner">
         <div class="video-header reveal">
-            <h2>Mira cómo funciona Motoclick</h2>
-            <p>En 2 minutos descubre cómo simplificamos la logística de última milla para tu negocio.</p>
+            <h2 data-i18n="video_title">Mira cómo funciona Motoclick</h2>
+            <p data-i18n="video_sub">En 2 minutos descubre cómo simplificamos la logística de última milla para tu negocio.</p>
         </div>
         <div class="video-container reveal">
             <!-- Replace the src below with your actual video URL (YouTube embed, Vimeo, or <video> tag) -->
@@ -530,7 +555,7 @@
                 <div class="video-play-btn">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
-                <p>Click para reproducir el video</p>
+                <p data-i18n="video_play">Click para reproducir el video</p>
             </div>
             <!-- Example: uncomment and replace with your YouTube video ID -->
             <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
@@ -542,40 +567,40 @@
 <section class="section features-section" id="features">
     <div class="section-inner">
         <div class="section-header reveal">
-            <span class="section-tag">Servicios</span>
-            <h2>Todo lo que tu negocio necesita</h2>
-            <p>Desde integración hasta tracking en tiempo real, cubrimos toda la cadena de delivery.</p>
+            <span class="section-tag" data-i18n="feat_tag">Servicios</span>
+            <h2 data-i18n="feat_title">Todo lo que tu negocio necesita</h2>
+            <p data-i18n="feat_sub">Desde integración hasta tracking en tiempo real, cubrimos toda la cadena de delivery.</p>
         </div>
         <div class="features-grid">
             <div class="feature-card reveal">
                 <div class="feature-icon"><i data-lucide="truck"></i></div>
-                <h3>Flota Dedicada</h3>
-                <p>Conductores exclusivos para tu negocio, uniformados y capacitados para tus horarios pico.</p>
+                <h3 data-i18n="feat1_title">Flota Dedicada</h3>
+                <p data-i18n="feat1_desc">Conductores exclusivos para tu negocio, uniformados y capacitados para tus horarios pico.</p>
             </div>
             <div class="feature-card reveal">
                 <div class="feature-icon"><i data-lucide="zap"></i></div>
-                <h3>Integración Rápida</h3>
-                <p>Conecta Uber Eats, DoorDash, Grubhub y tu POS en minutos. API robusta o panel manual.</p>
+                <h3 data-i18n="feat2_title">Integración Rápida</h3>
+                <p data-i18n="feat2_desc">Conecta Uber Eats, DoorDash, Grubhub y tu POS en minutos. API robusta o panel manual.</p>
             </div>
             <div class="feature-card reveal">
                 <div class="feature-icon"><i data-lucide="map-pin"></i></div>
-                <h3>Tracking en Tiempo Real</h3>
-                <p>SMS tracking para tus clientes con ETA real y mapa en vivo. Más transparencia, más recompras.</p>
+                <h3 data-i18n="feat3_title">Tracking en Tiempo Real</h3>
+                <p data-i18n="feat3_desc">SMS tracking para tus clientes con ETA real y mapa en vivo. Más transparencia, más recompras.</p>
             </div>
             <div class="feature-card reveal">
                 <div class="feature-icon"><i data-lucide="shield-check"></i></div>
-                <h3>Cobertura Garantizada</h3>
-                <p>Nunca te quedes sin conductor. Flota propia + red de respaldo para cubrir cada orden.</p>
+                <h3 data-i18n="feat4_title">Cobertura Garantizada</h3>
+                <p data-i18n="feat4_desc">Nunca te quedes sin conductor. Flota propia + red de respaldo para cubrir cada orden.</p>
             </div>
             <div class="feature-card reveal">
                 <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
-                <h3>Analytics & Reportes</h3>
-                <p>Dashboard con métricas clave: tiempos, costos, rendimiento por zona y satisfacción.</p>
+                <h3 data-i18n="feat5_title">Analytics & Reportes</h3>
+                <p data-i18n="feat5_desc">Dashboard con métricas clave: tiempos, costos, rendimiento por zona y satisfacción.</p>
             </div>
             <div class="feature-card reveal">
                 <div class="feature-icon"><i data-lucide="headphones"></i></div>
-                <h3>Soporte Dedicado</h3>
-                <p>Equipo bilingüe en Slack, WhatsApp o email. Respuesta en menos de 15 minutos.</p>
+                <h3 data-i18n="feat6_title">Soporte Dedicado</h3>
+                <p data-i18n="feat6_desc">Equipo bilingüe en Slack, WhatsApp o email. Respuesta en menos de 15 minutos.</p>
             </div>
         </div>
     </div>
@@ -585,30 +610,30 @@
 <section class="section" id="how">
     <div class="section-inner">
         <div class="section-header reveal">
-            <span class="section-tag">Cómo funciona</span>
-            <h2>De la solicitud al go-live en días</h2>
-            <p>Un proceso de onboarding guiado para que empieces a entregar rápido.</p>
+            <span class="section-tag" data-i18n="how_tag">Cómo funciona</span>
+            <h2 data-i18n="how_title">De la solicitud al go-live en días</h2>
+            <p data-i18n="how_sub">Un proceso de onboarding guiado para que empieces a entregar rápido.</p>
         </div>
         <div class="steps-grid">
             <div class="step-item reveal">
                 <div class="step-num">1</div>
-                <h4>Formulario</h4>
-                <p>Completa tu información de negocio en nuestro portal</p>
+                <h4 data-i18n="step1_title">Formulario</h4>
+                <p data-i18n="step1_desc">Completa tu información de negocio en nuestro portal</p>
             </div>
             <div class="step-item reveal">
                 <div class="step-num">2</div>
-                <h4>Discovery</h4>
-                <p>Definimos tu modelo operativo ideal juntos</p>
+                <h4 data-i18n="step2_title">Discovery</h4>
+                <p data-i18n="step2_desc">Definimos tu modelo operativo ideal juntos</p>
             </div>
             <div class="step-item reveal">
                 <div class="step-num">3</div>
-                <h4>Configuración</h4>
-                <p>Integramos canales, configuramos tu cuenta y hacemos QA</p>
+                <h4 data-i18n="step3_title">Configuración</h4>
+                <p data-i18n="step3_desc">Integramos canales, configuramos tu cuenta y hacemos QA</p>
             </div>
             <div class="step-item reveal">
                 <div class="step-num">4</div>
-                <h4>Go-Live</h4>
-                <p>Lanzamiento con monitoreo activo la primera semana</p>
+                <h4 data-i18n="step4_title">Go-Live</h4>
+                <p data-i18n="step4_desc">Lanzamiento con monitoreo activo la primera semana</p>
             </div>
         </div>
     </div>
@@ -618,16 +643,16 @@
 <section class="banner-strip reveal">
     <div class="banner-strip-inner">
         <img src="{{ asset('images/banner.png') }}" alt="Motoclick">
-        <p class="banner-tagline">Delivery inteligente para tu negocio</p>
+        <p class="banner-tagline" data-i18n="banner_tag">Delivery inteligente para tu negocio</p>
     </div>
 </section>
 
 <!-- ═══════════ CTA ═══════════ -->
 <section class="cta-section">
     <div class="cta-inner reveal">
-        <h2>¿Listo para transformar tus entregas?</h2>
-        <p>Únete a los comercios que ya confían en Motoclick para su logística. El onboarding toma solo minutos.</p>
-        <a href="/onboarding" class="btn-cta">
+        <h2 data-i18n="cta_title">¿Listo para transformar tus entregas?</h2>
+        <p data-i18n="cta_sub">Únete a los comercios que ya confían en Motoclick para su logística. El onboarding toma solo minutos.</p>
+        <a href="/onboarding" class="btn-cta" data-i18n="cta_btn">
             <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
             Iniciar mi Onboarding
         </a>
@@ -638,11 +663,11 @@
 <footer class="footer">
     <div class="footer-inner">
         <a href="/" class="footer-brand"><img src="{{ asset('images/icon.png') }}" alt="Motoclick"></a>
-        <p>&copy; 2026 Motoclick. Todos los derechos reservados.</p>
+        <p><span data-i18n="footer_copy">&copy; 2026 Motoclick. Todos los derechos reservados.</span></p>
         <ul class="footer-links">
-            <li><a href="/onboarding">Onboarding</a></li>
-            <li><a href="#features">Servicios</a></li>
-            <li><a href="#how">Cómo funciona</a></li>
+            <li><a href="/onboarding" data-i18n="footer_onboard">Onboarding</a></li>
+            <li><a href="#features" data-i18n="footer_services">Servicios</a></li>
+            <li><a href="#how" data-i18n="footer_how">Cómo funciona</a></li>
         </ul>
     </div>
 </footer>
@@ -774,6 +799,172 @@
             });
         }, { threshold: 0.2 });
         motoObs.observe(motoShowcase);
+    }
+</script>
+
+<script>
+    // ═══════════ I18N TRANSLATION ENGINE ═══════════
+    var currentLang = localStorage.getItem('motoclick_lang') || 'en';
+    
+    var I18N = {
+        es: {
+            // Nav
+            nav_video: 'Video',
+            nav_services: 'Servicios',
+            nav_how: 'Cómo funciona',
+            nav_onboarding: 'Comenzar Onboarding',
+            
+            // Hero
+            hero_badge: '<span class="hero-badge-dot"></span>Plataforma de delivery en New York',
+            hero_title: 'Tu delivery, <span class="highlight">menos comisiones,</span> más control.',
+            hero_highlight: 'menos comisiones,',
+            hero_sub: 'Integra tus apps, despacha con tu propia flota y ofrece tracking SMS a tus clientes. Todo desde un solo dashboard.',
+            hero_btn_primary: '<i data-lucide="rocket" style="width:18px;height:18px"></i>Comenzar Onboarding',
+            hero_btn_outline: '<i data-lucide="play" style="width:16px;height:16px"></i>Ver video',
+            
+            // Video
+            video_title: 'Mira cómo funciona Motoclick',
+            video_sub: 'En 2 minutos descubre cómo simplificamos la logística de última milla para tu negocio.',
+            video_play: 'Click para reproducir el video',
+            
+            // Features
+            feat_tag: 'Servicios',
+            feat_title: 'Todo lo que tu negocio necesita',
+            feat_sub: 'Desde integración hasta tracking en tiempo real, cubrimos toda la cadena de delivery.',
+            feat1_title: 'Flota Dedicada',
+            feat1_desc: 'Conductores exclusivos para tu negocio, uniformados y capacitados para tus horarios pico.',
+            feat2_title: 'Integración Rápida',
+            feat2_desc: 'Conecta Uber Eats, DoorDash, Grubhub y tu POS en minutos. API robusta o panel manual.',
+            feat3_title: 'Tracking en Tiempo Real',
+            feat3_desc: 'SMS tracking para tus clientes con ETA real y mapa en vivo. Más transparencia, más recompras.',
+            feat4_title: 'Cobertura Garantizada',
+            feat4_desc: 'Nunca te quedes sin conductor. Flota propia + red de respaldo para cubrir cada orden.',
+            feat5_title: 'Analytics & Reportes',
+            feat5_desc: 'Dashboard con métricas clave: tiempos, costos, rendimiento por zona y satisfacción.',
+            feat6_title: 'Soporte Dedicado',
+            feat6_desc: 'Equipo bilingüe en Slack, WhatsApp o email. Respuesta en menos de 15 minutos.',
+            
+            // How it works
+            how_tag: 'Cómo funciona',
+            how_title: 'De la solicitud al go-live en días',
+            how_sub: 'Un proceso de onboarding guiado para que empieces a entregar rápido.',
+            step1_title: 'Formulario',
+            step1_desc: 'Completa tu información de negocio en nuestro portal',
+            step2_title: 'Discovery',
+            step2_desc: 'Definimos tu modelo operativo ideal juntos',
+            step3_title: 'Configuración',
+            step3_desc: 'Integramos canales, configuramos tu cuenta y hacemos QA',
+            step4_title: 'Go-Live',
+            step4_desc: 'Lanzamiento con monitoreo activo la primera semana',
+            
+            // Banner & CTA
+            banner_tag: 'Delivery inteligente para tu negocio',
+            cta_title: '¿Listo para transformar tus entregas?',
+            cta_sub: 'Únete a los comercios que ya confían en Motoclick para su logística. El onboarding toma solo minutos.',
+            cta_btn: '<i data-lucide="arrow-right" style="width:18px;height:18px"></i>Iniciar mi Onboarding',
+            
+            // Footer
+            footer_copy: '&copy; 2026 Motoclick. Todos los derechos reservados.',
+            footer_onboard: 'Onboarding',
+            footer_services: 'Servicios',
+            footer_how: 'Cómo funciona'
+        },
+        en: {
+            // Nav
+            nav_video: 'Video',
+            nav_services: 'Services',
+            nav_how: 'How it Works',
+            nav_onboarding: 'Start Onboarding',
+            
+            // Hero
+            hero_badge: '<span class="hero-badge-dot"></span>Delivery platform in New York',
+            hero_title: 'Your delivery, <span class="highlight">fewer commissions,</span> more control.',
+            hero_highlight: 'fewer commissions,',
+            hero_sub: 'Integrate your apps, dispatch your own fleet and offer SMS tracking to your clients. Everything from a single dashboard.',
+            hero_btn_primary: '<i data-lucide="rocket" style="width:18px;height:18px"></i>Start Onboarding',
+            hero_btn_outline: '<i data-lucide="play" style="width:16px;height:16px"></i>Watch video',
+            
+            // Video
+            video_title: 'See how Motoclick works',
+            video_sub: 'In 2 minutes discover how we simplify last-mile logistics for your business.',
+            video_play: 'Click to play the video',
+            
+            // Features
+            feat_tag: 'Services',
+            feat_title: 'Everything your business needs',
+            feat_sub: 'From integration to real-time tracking, we cover the entire delivery chain.',
+            feat1_title: 'Dedicated Fleet',
+            feat1_desc: 'Exclusive drivers for your business, uniformed and trained for your peak hours.',
+            feat2_title: 'Fast Integration',
+            feat2_desc: 'Connect Uber Eats, DoorDash, Grubhub and your POS in minutes. Robust API or manual panel.',
+            feat3_title: 'Real-Time Tracking',
+            feat3_desc: 'SMS tracking for your clients with a real ETA and live map. More transparency, more repurchases.',
+            feat4_title: 'Guaranteed Coverage',
+            feat4_desc: 'Never run out of a driver. Own fleet + backup network to cover every order.',
+            feat5_title: 'Analytics & Reports',
+            feat5_desc: 'Dashboard with key metrics: times, costs, performance by area and satisfaction.',
+            feat6_title: 'Dedicated Support',
+            feat6_desc: 'Bilingual team on Slack, WhatsApp or email. Response in less than 15 minutes.',
+            
+            // How it works
+            how_tag: 'How it works',
+            how_title: 'From application to go-live in days',
+            how_sub: 'A guided onboarding process so you can start delivering quickly.',
+            step1_title: 'Form',
+            step1_desc: 'Complete your business information in our portal',
+            step2_title: 'Discovery',
+            step2_desc: 'We define your ideal operating model together',
+            step3_title: 'Configuration',
+            step3_desc: 'We integrate channels, configure your account and do QA',
+            step4_title: 'Go-Live',
+            step4_desc: 'Launch with active monitoring the first week',
+            
+            // Banner & CTA
+            banner_tag: 'Smart delivery for your business',
+            cta_title: 'Ready to transform your deliveries?',
+            cta_sub: 'Join the businesses that already trust Motoclick for their logistics. The onboarding takes just minutes.',
+            cta_btn: '<i data-lucide="arrow-right" style="width:18px;height:18px"></i>Start my Onboarding',
+            
+            // Footer
+            footer_copy: '&copy; 2026 Motoclick. All rights reserved.',
+            footer_onboard: 'Onboarding',
+            footer_services: 'Services',
+            footer_how: 'How it works'
+        }
+    };
+
+    function switchLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('motoclick_lang', lang);
+        document.documentElement.lang = lang;
+
+        // Update toggle buttons
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+
+        // Apply translations
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n');
+            if (lang === 'es' && I18N.es[key]) {
+                el.innerHTML = I18N.es[key];
+            } else if (lang === 'en' && I18N.en[key]) {
+                el.innerHTML = I18N.en[key];
+            }
+        });
+        
+        // Ensure Lucide icons are recreated
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    }
+
+    // Apply saved language on load
+    if (currentLang !== 'es') {
+        switchLang(currentLang);
+    } else {
+        // Enforce default ES to ensure toggle state matches
+        switchLang('es');
     }
 </script>
 
